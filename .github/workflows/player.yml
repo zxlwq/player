@@ -1,4 +1,4 @@
-name: 构建并推送 Player Docker 镜像
+name: 推送Docker镜像
 
 on:
   workflow_dispatch:
