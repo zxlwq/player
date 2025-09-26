@@ -203,6 +203,18 @@ class PlayerCreator {
 
     //根据歌曲去渲染视图
     renderSongStyle() {
+        // 检查是否有歌曲
+        if (this.musics.songs.length === 0) {
+            this.audio.src = '';
+            this.render_doms.title.html('暂无歌曲');
+            this.render_doms.singer.html('请添加音乐文件');
+            document.title = '音乐播放器';
+            
+            // 使用默认图片
+            this.preloadAndSetImage('/static/music_data/images/a.png');
+            return;
+        }
+
         let {
             title,
             singer,
@@ -609,6 +621,12 @@ class PlayerCreator {
 
     //更改歌曲索引
     changeSongIndex(type) {
+        // 检查是否有歌曲
+        if (this.musics.songs.length === 0) {
+            this.song_index = 0;
+            return;
+        }
+
         if (typeof type === 'number') {
             this.song_index = type;
         } else {
@@ -642,6 +660,12 @@ class PlayerCreator {
     }
     //切换歌曲
     changeSong(type) {
+        // 检查是否有歌曲
+        if (this.musics.songs.length === 0) {
+            this.renderSongStyle();
+            return;
+        }
+
         //更改索引
         this.changeSongIndex(type);
         //记录切歌前的状态
