@@ -203,22 +203,12 @@ class PlayerCreator {
 
     //根据歌曲去渲染视图
     renderSongStyle() {
-        const song = this.musics.getSongByNum(this.song_index);
-        if (!song) {
-            // 如果没有歌曲，显示默认信息
-            this.render_doms.title.html('暂无歌曲');
-            this.render_doms.singer.html('请添加音乐');
-            document.title = '音乐播放器';
-            this.audio.src = '';
-            return;
-        }
-        
-        const {
+        let {
             title,
             singer,
             songUrl,
             imageUrl
-        } = song;
+        } = this.musics.getSongByNum(this.song_index);
         this.audio.src = songUrl;
         this.render_doms.title.html(title);
         this.render_doms.singer.html(singer);
@@ -588,11 +578,6 @@ class PlayerCreator {
 
     //播放暂停控制
     handlePlayAndPause() {
-        // 如果没有歌曲，不执行播放操作
-        if (this.musics.songs.length === 0) {
-            return;
-        }
-        
         let _o_i = this.$play.$el.find('i');
         //this.audio.pauseed值为true 说明目前是不播放
         if (this.audio.paused) { //现在是暂停的 要播放
@@ -624,12 +609,6 @@ class PlayerCreator {
 
     //更改歌曲索引
     changeSongIndex(type) {
-        // 如果没有歌曲，重置索引为0
-        if (this.musics.songs.length === 0) {
-            this.song_index = 0;
-            return;
-        }
-        
         if (typeof type === 'number') {
             this.song_index = type;
         } else {
@@ -665,13 +644,6 @@ class PlayerCreator {
     changeSong(type) {
         //更改索引
         this.changeSongIndex(type);
-        
-        // 如果没有歌曲，不执行后续操作
-        if (this.musics.songs.length === 0) {
-            this.renderSongStyle();
-            return;
-        }
-        
         //记录切歌前的状态
         let _is_pause = this.audio.paused;
         //切歌后更改视图显示
