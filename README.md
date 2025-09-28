@@ -1,6 +1,6 @@
 ---
 title: Player
-emoji: 🏃
+emoji: 🎵
 colorFrom: yellow
 colorTo: purple
 sdk: docker
