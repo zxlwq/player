@@ -7,26 +7,40 @@ sdk: docker
 app_port: 3000
 pinned: false
 ---
-## 在线音乐播放器
+# 在线音乐播放器
 
 这是一个在线音乐播放器，集成api增加删除歌曲，可批量添加或删除，支持的音乐格式: mp3/wav/flac/m4a
 
 ![Player](./Player.png)
 
 ## Hugging Face Spaces部署
-### 第一种方式：打包Docker镜像,使用抱脸SDK创建Player
+#### 第一种方式：打包Docker镜像,使用抱脸SDK创建Player
 先在抱脸创建Access Tokens写权限，再Github Actions一键部署到Hugging Face
 或者直接使用我的Docker镜像
 Dockerfile
 ```
 FROM ghcr.io/zxlwq/player:latest
 ```
-### 第二种方式 原源代码部署
-README.md添加一行
+#### 第二种方式 原源代码部署
+新建Spaces选择Docker空白的模板
+#### 添加环境变量
+New Variables
+```
+GIT_REPO
+```
+New Secrets
+```
+GIT_TOKEN
+```
+New Secrets
+```
+ADMIN_PASSWORD
+```
+在README.md添加一行
 ```
 app_port: 3000
 ```
-Dockerfile
+新建Dockerfile
 ```
 FROM node:18-alpine
 
@@ -36,6 +50,7 @@ WORKDIR /app
 
 ARG GIT_TOKEN
 ARG GIT_REPO
+ARG ADMIN_PASSWORD
 
 RUN rm -rf /app/* \
 && git clone https://${GIT_TOKEN}@github.com/${GIT_REPO}.git . \
@@ -44,15 +59,6 @@ RUN rm -rf /app/* \
 EXPOSE 3000
 
 CMD ["node", "app.js"]
-```
-## 环境变量
-New Variables
-```
-GIT_REPO
-```
-New Secrets
-```
-GIT_TOKEN
 ```
 
 ## VPS部署
