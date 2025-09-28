@@ -1,17 +1,3 @@
-## 在线音乐播放器
-
-这是一个在线音乐播放器，集成api增加删除歌曲，可批量添加或删除，支持的音乐格式: mp3/wav/flac/m4a
-
-![Player](./Player.png)
-
-## Hugging Face Spaces部署
-### 第一种方式：打包Docker镜像
-或者直接使用我的
-Dockerfile
-```
-FROM ghcr.io/zxlwq/player:latest
-```
-### 第二种方式 原源代码部署
 ---
 title: Player
 emoji: 🏃
@@ -21,6 +7,22 @@ sdk: docker
 app_port: 3000
 pinned: false
 ---
+## 在线音乐播放器
+
+这是一个在线音乐播放器，集成api增加删除歌曲，可批量添加或删除，支持的音乐格式: mp3/wav/flac/m4a
+
+![Player](./Player.png)
+
+## Hugging Face Spaces部署
+### 第一种方式：打包Docker镜像,使用抱脸SDK创建Player
+先在抱脸创建Access Tokens写权限，再Github Actions一键部署到Hugging Face
+或者直接使用我的Docker镜像
+Dockerfile
+```
+FROM ghcr.io/zxlwq/player:latest
+```
+### 第二种方式 原源代码部署
+README.md添加一行
 ```
 app_port: 3000
 ```
