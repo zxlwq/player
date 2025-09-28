@@ -1,3 +1,17 @@
+## 在线音乐播放器
+
+这是一个在线音乐播放器，集成api增加删除歌曲，可批量添加或删除，支持的音乐格式: mp3/wav/flac/m4a
+
+![Player](./Player.png)
+
+## Hugging Face Spaces部署
+### 第一种方式：打包Docker镜像
+或者直接使用我的
+Dockerfile
+```
+FROM ghcr.io/zxlwq/player:latest
+```
+### 第二种方式 原源代码部署
 ---
 title: Player
 emoji: 🏃
@@ -30,17 +44,16 @@ EXPOSE 3000
 CMD ["node", "app.js"]
 ```
 ## 环境变量
+New Variables
 ```
 GIT_REPO
 ```
+New Secrets
 ```
 GIT_TOKEN
 ```
-## 在线音乐播放器
 
-这是一个在线音乐播放器，集成api增加删除歌曲，可批量添加或删除，支持的音乐格式: mp3/wav/flac/m4a
-
-## 部署
+## VPS部署
 
 ### 源代码部署
 * 安装nodejs环境,可直接使用工具箱一键安装或使用下列命令安装
@@ -51,17 +64,18 @@ curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && install no
 * 部署主体项目
 ```
 apt install git screen -y
-git clone https://github.com/eooce/music-player
-cd music-player && rm -rf Dockerfile README.md .github
+git clone https://github.com/zxlwq/Player
+cd Player && rm -rf Dockerfile README.md .github
 npm install
 screen npm start 
 ```
 
 ### Docker一键部署
+
 * 管理密码环境变量：`ADMIN_PASSWORD`
 
 ```
-ghcr.io/eooce/music-player:latest
+zxlwq/player
 ```
 ### Docker-compose一键部署
 ```bash
@@ -69,7 +83,7 @@ version: '3'
 
 services:
   music-player:
-    image: ghcr.io/eooce/music-player:latest
+    image: zxlwq/player:latest
     ports:
       - "3000:3000"
     volumes:
