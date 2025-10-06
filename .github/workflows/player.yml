@@ -48,11 +48,11 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/zxlwq/player:${{ github.event.inputs.tag }}
-            ${{ github.event.inputs.push_dockerhub && format('docker.io/{0}/player:{1}', secrets.DOCKER_HUB_USERNAME, github.event.inputs.tag) }}
+            ghcr.io/zxlwq/music:${{ github.event.inputs.tag }}
+            ${{ github.event.inputs.push_dockerhub && format('docker.io/{0}/music:{1}', secrets.DOCKER_HUB_USERNAME, github.event.inputs.tag) }}
           labels: |
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
-            org.opencontainers.image.description=Player Docker 镜像
+            org.opencontainers.image.description=music Docker 镜像
             org.opencontainers.image.licenses=MIT
           cache-from: type=gha
           cache-to: type=gha,mode=max
